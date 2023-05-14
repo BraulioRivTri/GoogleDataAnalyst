@@ -1,0 +1,477 @@
+---
+title: "CASO_PRACTICO"
+author: "Braulio"
+date: "2023-03-31"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Análisis de Datos.
+# Bellabeat Google Data Analytics
+
+En este repositorio, se encuentra el caso práctico para la certificación de Análisis de Datos de Google.
+
+## Descripción del proyecto
+
+### ¿Cómo puede hacer una empresa tecnología para el bienestar para tomar decisiones inteligentes?
+Urška Sršen y Sando Mur fundaron Bellabeat, una empresa de alta tecnología que fabrica productos inteligentes focalizados en el cuidado de la salud. Sršen usó su experiencia como artista para desarrollar una tecnología con un bonito diseño que informará e inspirará a las mujeres de todo el mundo. Recopilar datos sobre la actividad física, el sueño, el estrés y la salud reproductiva le ha permitido a Bellabeat proporcionar a las mujeres conocimientos sobre su propia salud y sus hábitos. Desde su fundación, en 2013, Bellabeat creció a un ritmo vertiginoso y rápidamente se posicionó como empresa de bienestar impulsada por la tecnología para las mujeres.
+
+En 2016, Bellabeat ya había inaugurado oficinas en todo el mundo y lanzado múltiples productos. Los productos Bellabeat pasaron a estar disponibles en línea a través de un creciente número de comerciantes minoristas además del canal de comercio electrónico propio de Bellabeat en su [sitio web](https://bellabeat.com/). La empresa invirtió en medios publicitarios tradicionales, como radio, cartelería en la vía pública, prensa gráfica y televisión, pero se centra mayormente en el marketing digital. Bellabeat invierte todo el año en Google Search, mantiene activas las páginas de Facebook e Instagram e interactúa de manera constante con los consumidores en Twitter. A su vez, Bellabeat publica anuncios por video en YouTube y avisos publicitarios en Red de Display de Google para apoyar las campañas en fechas de marketing claves.
+
+
+#### Productos de la empresa
+
+* **Aplicación Bellabeat**: La aplicación Bellabeat proporciona a los usuarios datos de salud relacionados con su actividad física, sueño, estrés, ciclo menstrual y hábitos de conciencia plena. Estos datos pueden ayudar a los usuarios a comprender sus hábitos actuales y adoptar decisiones saludables. La aplicación Bellabeat se conecta a su línea de productos de bienestar inteligentes.
+
+* **Leaf**: Dispositivo de seguimiento clásico de bienestar de Bellabeat que se puede usar como pulsera, collar o clip. El dispositivo Leaf se conecta a la aplicación Bellabeat para hacer un seguimiento de la actividad física, el sueño y el estrés.
+
+*	**Time**: Este reloj de bienestar combina el aspecto intemporal de un reloj clásico con la tecnología inteligente para hacer el seguimiento de la actividad física, el sueño y el estrés del usuario. El reloj Time se conecta a la aplicación Bellabeat para proporcionar información sobre el bienestar diario.
+
+*	**Spring**: Es una botella de agua que hace el seguimiento diario del consumo de agua mediante el uso de tecnología inteligente para garantizar la hidratación adecuada a lo largo del día. La botella Spring se conecta a la aplicación Bellabeat para hacer el seguimiento de los niveles de hidratación.
+
+# Fase I: Preguntar
+
+Sršen te pide que analices los datos de uso de los dispositivos inteligentes para saber cómo usan los consumidores los dispositivos inteligentes que no son de Bellabeat. 
+Después, quiere que selecciones un producto Bellabeat para aplicar estos conocimientos en tu presentación. Estas preguntas orientarán tu análisis:
+
+1.	¿Cuáles son algunas tendencias de uso de los dispositivos inteligentes?
+2.	¿Cómo se podrían aplicar estas tendencias a los clientes de Bellabeat?
+3.	¿Cómo podrían ayudar estas tendencias a influir en la estrategia de marketing de Bellabeat?
+
+## Resumen de la tarea
+La tecnología está cada vez más presente en nuestras actividades, incluidos aspectos como la calidad de vida y la actividad física. 
+La intención de monitorear indicadiores biométricos, puede tener intenciones de llevar un control médico o revisar el cumplimiento de algún objetivo deportivo.
+Bellabeat ofrece varios productos enfocados especialmente en la salud de las mujeres, por lo que les interesa emplear 
+A través de los datos de una herramienta de monitoreo de actividad física, se busca información que sustente una estrategia de marketing de alto nivel, basandonos en algunos ficheros públicos.
+
+Dado que Bellabeat ofrece productos innovadores como botellas, pulseras, collares o clips es difícil poder compararlo con otros dispositivos. Se tomará como referencia el uso de smartwatch para describir un poco el mercado en el que se encuentra la empresa.
+
+Se proyecta que el mercado global tan sólo de relojes inteligentes crezca de $22,02 mil millones en 2021 a $58,21 mil millones para 2028, según el reporte de Fortune Business Insights. Incluso antes de la pandemia de COVID-19 estos dispositivos realizaban algunas mediciones médicas, más allá de sólo ser contadores de pasos, midiendo quema de calorías, ritmo cardiaco, niveles de glucosa, estrés, azúcar, etc. El incremento esperado, se puede observar mejor en la siguiente gráfica.
+
+
+
+## Fuentes
+Se propone usar los siguientes recursos en el proyecto.
+- Reporte sobre el incremento de ventas de dispositivos smartwatch por 
+  [Fortune Business Insights](https://www.fortunebusinessinsights.com/smartwatch-market-106625)
+- Datos públicos de [FitBit](https://www.kaggle.com/datasets/arashnic/fitbit)
+- Artículo sobre la relación entre el ciclo menstrual y la actividad física por [Xanne A.K. Janse de Jonge](https://paulogentil.com/pdf/Effects%20of%20the%20menstrual%20cycle%20on%20exercise%20performance.pdf)
+- "Physical Activity Guidelines for Americans" [sitio web](https://health.gov/sites/default/files/2019-09/Physical_Activity_Guidelines_2nd_edition.pdf)
+
+# Fase II: Preparar
+
+## Datos propuestos
+
+A petición de Sršen, el primer dataset a tomar en cuenta será el de **Datos de seguimiento de actividad física de Fitbit** (CC0: Dominio público, conjunto de datos disponibles a través de Mobius).
+Este conjunto de datos de Kaggle contiene el seguimiento de la actividad física personal en treinta usuarios de Fitbit. Treinta usuarios elegibles de Fitbit prestaron su consentimiento para el envío de datos personales de seguimiento que incluyen rendimiento de la actividad física en minutos, ritmo cardíaco y monitoreo del sueño. Incluye información sobre la actividad diaria, pasos y ritmo cardíaco que se puede usar para explorar los hábitos de los usuarios.
+
+
+#### Credibilidad de los datos FitBit
+A pesar de que pareciera tener mucha información para trabajar, el número de registros ya nos crea limitaciones. Se verificó con el sistema ROCCC la credibilidad.
+
+- [ ] Confiables: No cumplen este aspecto, puesto que no tenemos una explicación metodologica clara.
+- [ ] Originales: No es un conjunto de datos original, pues no tenemos una publicación confiable por parte de FitBit. demás, que se tratan de datos de segunda mano, no capturados por Bellabeat sino comprados o adquiridos por otro medio
+- [ ] Integrales: No cumplen con ser integrales, porque no hay información sobre los participantes, como sexo, edad, estado de salud, etc. Esto podría significar que los datos no fueron aleatorizados. Si los datos están sesgados, los conocimientos del análisis serán injustos para todo tipo de personas.
+- [ ] Actuales: Tampoco se cumple, porque la recolección se realizó en 2016 y es posible que no represente el mercado actual.
+- [ ] Citados: No contamos con una fuente seria, para considerar esta característica.
+
+
+## Otras fuentes de datos
+
+Se buscó algún otro dataset, que nos aportara información sobre temas como dispositivos inteligentes, salud, menstruación o impacto de actividad fisica en mujeres; sin embargo, no existen fuentes públicas que nos ayuden a completar este análisis.
+
+# Fase III: Procesar
+
+## Exportación de librerías.
+
+Lo primero que se realizó fue exportar las librerías necesarias para poder comenzar con el análisis de datos. A continuaciuón, se encuentran las librerías abiertas para la realización del presente análisis:
+
+```{r}
+library(tidyverse)
+library('lubridate')
+library(dplyr)
+library("formattable")
+library(ggcorrplot)
+library(lmtest)
+```
+## Lectura de archivos.
+Del data warehouse disponible para el análisis de Bellabeat, se eligieron los archivos csv:
+
+
+* **dailyActivity_merged:** En este archivo se encuentra el resumen diario de la actividad de los usuarios, en este nos interesan las variables de minutos y distancia de los distintos niveles de intensidad al ejercitarse,las calorías quemadas y el total de pasos.
+* **sleepDay_merged:** En este archivo se encuentra el resumen diario de la actividad de los usuarios en cuestion de sueño y de descanso
+* **weightLogInfo_merged:** En este se encuentra el peso del usuario en kilogramos y libas, su índice de masa corporal y si estos registros se ingresaron de forma manual. Debido a la cantidad de infromación disponible en este archivo sí se consideró de un principio pero no se encontró una utilidad posterior.
+
+Se expresa el código utilizado para cargar las bases a nuestro entorno en R:
+
+```{r}
+daily_act<-read_csv("dailyActivity_merged.csv",locale=locale(encoding="latin1"))
+head(daily_act)
+sleep_day<-read_csv("sleepDay_merged.csv",locale=locale(encoding="latin1"))
+head(sleep_day)
+weight_info<-read_csv("weightLogInfo_merged.csv",locale=locale(encoding="latin1"))
+head(weight_info)
+```
+
+##Limpieza de datos
+Primero, se revisaron los archivos para encontrar si contenían información de los mismos usuarios; esto se realizo mediante uso de la función "unique" sobre la columna Id.
+
+```{r}
+unique(daily_act$Id)
+unique(sleep_day$Id)
+unique(weight_info$Id)
+```
+
+Entre daily_act y sleep_day se encontraron 24 usuarios en común. Y en weight_info solo tenemos 8 usuarios en común con los demás archivos.
+
+Después, se comprobó que ambos archivos comprendieran el mismo periodo de tiempo. Se realizó de igual forma con la función "unique" sobre la columna "ActivityDate" para daily_act, "SleepDay" en sleep_day y "Date" en weight_info.
+
+```{r}
+unique(daily_act$ActivityDate)
+unique(sleep_day$SleepDay)
+unique(weight_info$Date)
+```
+
+Las bases de datos comprenden el mismo periodo de tiempo del 4 de diciembre de 2016 al 5 de diciembre de 2016. Pero, ambas bases no tenían el tipo de dato con la misma estructura; daily_act expresaba la fecha en tipo de dato "Date" que expresa solo el día, el mes y año de la fecha y con estructura mes, día y año. Mientras que sleep_day lo expresaba en tipo de dato  "Datetime" donde también incluía la hora y minuto del registro de su actividad de sueño con estructura mes, día, año, hora, minuto y segundo. weight_info tenía la misma estructura de dtao que sleep_day.
+
+Así, se buscó que ambas bases de datos tuvieran la fecha con la misma estructura, esto se logró de la siguiente forma:
+
+```{r}
+daily_act<-daily_act %>% 
+  mutate(ActivityDate=format(as.POSIXct(ActivityDate,format='%m/%d/%Y'),format='%m/%d/%Y'))
+head(daily_act)
+sleep_day<-sleep_day %>% 
+  mutate(SleepDay=format(as.POSIXct(SleepDay,format='%m/%d/%Y %H:%M:%S'),format='%m/%d/%Y'))
+head(sleep_day)
+weight_info<-weight_info %>% 
+  mutate(Date=format(as.POSIXct(Date,format='%m/%d/%Y %H:%M:%S'),format='%m/%d/%Y'))
+head(weight_info)
+```
+###  Duplicados
+
+Ya con las fechas en formato similar, se buscó que ambas bases de datas no tuvieran duplicados. Para esto se usó la función "sum" y "duplicated" para contar cuantos duplicados tenía cada base.
+
+
+```{r}
+sum(duplicated(sleep_day))
+sum(duplicated(daily_act))
+sum(duplicated(weight_info))
+```
+
+Se encontraron duplicados en sleep_day por lo tanto estos fueron eliminados.
+
+```{r}
+sleep_day %>% distinct(Id,SleepDay,.keep_all = TRUE)
+```
+
+También, se cambiaron de nombre las columnas que expresaban las fechas en ambas bases de datos. Esto para simplificar las uniones que se hacen en el presente análisis.
+
+```{r}
+daily_act<-daily_act %>% 
+  rename(date=ActivityDate)
+head(daily_act)
+sleep_day<-sleep_day %>% 
+  rename(date=SleepDay)
+head(sleep_day)
+weight_info<-weight_info %>% 
+  rename(date=Date)
+head(weight_info)
+```
+
+Aunque ya se han quitado filas duplicadas en las bases de datos, se comprobó que no exisiteran dos registros del mismo usuario en la misma fecha pero con distintos valores en las diferentes columnas.
+
+```{r}
+daily_act %>% 
+  group_by(date,Id) %>%  
+  summarise(n = n()) %>% 
+  View()
+sleep_day %>% 
+  group_by(date,Id) %>%  
+  summarise(n = n()) %>% 
+  View()
+weight_info %>% 
+  group_by(date,Id) %>% 
+  summarise(n = n()) %>% 
+  View()
+```
+
+Como se puede observar no existen dos o más registros del mismo usuario en la misma fecha.
+
+## Unión de las bases de datos.
+
+Para poder trabajar con nuestras bases de datos se decidió unirlas en un mismo datadrame, este fue el código utilizado.
+
+```{r}
+act_sleep<-daily_act %>% 
+  left_join(sleep_day, by=c('Id'='Id','date'='date'))
+View(act_sleep)
+a_s_w<-act_sleep %>% 
+  left_join(weight_info,by=c('Id'='Id','date'='date'))
+head(a_s_w)
+colnames(a_s_w)
+n_distinct(a_s_w$Id)
+```
+# FASE IV: Analizar
+
+## Categorización de nuestros usuarios
+Ahora, se propone categorizar a los usuarios de nuestro dataframe de acuerdo a la actividad que realizan durante el día. Para esto se consideró el articulo "Physical Activity Guidelines for Americans" que se puede encontrar en el siguiente url [sitio web](https://health.gov/sites/default/files/2019-09/Physical_Activity_Guidelines_2nd_edition.pdf) que expresa que las peronas que realizan entre 150 y 300 minutos de actividad moderada-intensa llevan un estilo de vida sano. Que sería similar a realizar de 75 a 150 de actividad intensa. Si se superan estos intervalos se pueden conseguir mejores beneficios para la salud. Pero si no se cumplen estos intervalos y se realiza un tiempo menor de estas actividades se consideraría no saludable.
+
+Para dicha categorización, primero se obtuvo el promedio de tiempo de actividad intensa, moderada, ligera y sedentaria de cada uno de nuestros usuarios.
+
+```{r}
+id_activity <- a_s_w %>%
+  group_by(Id) %>% 
+  summarize(avg_very_act_min=mean(VeryActiveMinutes),avg_fair_act_min=mean(FairlyActiveMinutes),avg_lig_min=mean(LightlyActiveMinutes),avg_sed_min=mean(SedentaryMinutes))
+head(id_activity)
+```
+
+Después, se ajustó la categorización mencionada a minutos de actividad por días, debido a que de esta forma es como tenemos la información y así obtuvimos una categorización de usuarios
+
+```{r}
+healthy_rank<-id_activity %>%
+  mutate(healthy_rank=case_when(
+    avg_very_act_min>(150/7) | avg_fair_act_min>(300/7) ~ 'A:VERY HEALTHY',
+    between(avg_very_act_min,(75/7),(150/7)) | between(avg_fair_act_min,(150/7),(300/7))~ 'B:Healthy',
+    avg_very_act_min<(75/7) | avg_fair_act_min<150 ~ 'C:NOT HEALTHY'
+  ))
+head(healthy_rank)
+
+
+```
+
+Ahora, para saber que cantidad de usuarios teníamos de acuerdo a cada una de las categorías y que porcentaje de ellos comprendían nuestro dataframe. Para esto, se creó otro dataframe que guardaba la frecuencia y pocentaje de cada categoría del dataframe. 
+```{r}
+x<-as.data.frame(table(healthy_rank$healthy_rank))
+x<-x %>%
+  reframe(percentage=Freq/nrow(healthy_rank)) %>%
+  mutate(real_perc=formattable::percent(percentage)) %>% 
+  mutate(healthy_rank=c('A:VERY HEALTHY','B:Healthy','C:NOT HEALTHY'))
+```
+
+Esta información se expresa en el siguiente gráfico:
+
+```{r}
+
+ggplot(x,aes(x="",y=real_perc, fill=healthy_rank))+
+  geom_bar(stat="identity",color="white")+
+  geom_text(aes(label=real_perc),
+            position = position_stack(vjust=0.5),color="white",size=5)+
+  coord_polar(theta="y")+
+  scale_fill_manual(values=c("pink","purple","sky blue"))+
+  theme_void()+
+  labs(title="Healthy_ranks")
+```
+
+Podemos observar que un porcentaje mayor que utliza este tipo de producto no tiene habitos saludables, seguido por los que superan lo recomendado y finalmente los que se encuentran en los intervalos recomendados por la "Physical Activity Guidelines for Americans".
+
+## Hábitos de sueño
+Es conocido que las horas de sueño recomendadas para las personas es de 8 horas. Se análizaran los hábitos de sueño que tienen las categorías creadas.
+
+Para esto, se obtendrá el promedio de tiempo en cama y el promedio de tiempo dormido de cada uno de los usuarios.
+
+```{r}
+id_sleep<- sleep_day %>% 
+  group_by(Id) %>% 
+  summarize(avg_min_asleep=mean(TotalMinutesAsleep),avg_time_bed=mean(TotalTimeInBed))
+head(id_sleep)
+```
+
+De esta forma, ya sabemos en promedio cuanto tiempo los usuarios pasan en la cama y cuanto pasan dormidos. 
+Ahora, creamos un datarame con los Id de cada usuario y en que categoría se ecnuentran de la siguiente forma.
+
+```{r}
+h_r<-select(healthy_rank,Id,healthy_rank)
+view(h_r)
+```
+
+Hacemos la unión entre nuestros dataframes id_sleep, que contiene la información de hábitos de sueño por usuario y h_r que contiene el usuario y su categorización, esto para poder agrupar la información de acuerdo a las categorías y saber el promedio de tiempo en cama y tiempo dormido de ellas. 
+
+
+```{r}
+h_r_sleep<-id_sleep %>% 
+  left_join(h_r,by=c('Id'='Id'))
+```
+Agrupamos el promedio de tiempo dormido de acuerdo a cada categoría y visualizamos dicha información.
+```{r}
+y<-h_r_sleep %>% 
+  group_by(healthy_rank) %>% 
+  summarize(h_r_min_sleep=mean(avg_min_asleep))
+head(y)
+ggplot(data=y)+
+  geom_col(mapping=aes(x=h_r_min_sleep,y=healthy_rank,fill="pink"))+
+  geom_vline(xintercept=480, color="purple")+
+  labs(title="Average of minutes sleeping per healthy_rank")
+```
+
+De igual forma, agrupamos el tiempo en cama de acuerdo a cada categoría y observamos en un gráfico su comportamiento.
+
+```{r}
+yy<-h_r_sleep %>% 
+  group_by(healthy_rank) %>% 
+  summarize(h_r_avg_time_bed=mean(avg_time_bed))
+head(yy)
+
+ggplot(data=yy)+
+  geom_col(mapping=aes(x=h_r_avg_time_bed,y=healthy_rank,fill="pink"))+
+  labs(title="Average of minutes in bed per healthy_rank")
+```
+
+Podemos observar que niguna categoría cumple con los mintos de sueño recomenados. Y también que la gente que realiza mayor actividad física y consideramos como "VERY HEALTHY" permanece menos tiempo en cama. Y que "HEALTHY" y "NOT HEALTHY" tienen tiempos muy similares.
+
+## Calorías por categoría
+
+Se realizó un ejercicio similar para contar cuantas calorías quema cada una de las categorías. Esto tiene como objetivo demostrar otros beneficios de hábitos de ejercicio saludables. Al igual que en el análisis de los hábitos de sueño, se crea un dataframe que agrupa el promedio de calorías quemadas por usuario en un día, se une con el dataframe que contiene el usuario y su categoría. Despues se obtiene el promedio de calorías quemadas por categoría y finalmente se visualiza la infromación.
+
+```{r}
+id_cal<-daily_act %>% 
+  group_by(Id) %>% 
+  summarize(avg_Calories=mean(Calories))
+
+h_r_calories<-id_cal %>% 
+  left_join(h_r,by=c('Id'='Id'))
+
+z<-h_r_calories %>% 
+  group_by(healthy_rank) %>% 
+  summarize(h_r_avg_calories=mean(avg_Calories))
+
+ggplot(data=z)+
+  geom_col(mapping=aes(x=h_r_avg_calories,y=healthy_rank,fill='purple'))+
+  labs(title="Average calories burnt by healthy rank")
+
+```
+
+Efectivamente, entre más habitpos de ejercicio saludables se tenga, más calorías quema el usuario
+
+
+## Modelo de regresión lineal
+
+Finalmente, se propone un modelo de regresión lineal que busca predecir las calorías quemadas por días de acuerdo a la distancia recorrida por el usuario, una variable booleana acerca de la actividad física intensa en minutos, el peso en kilogramos y una razón de sueño.
+
+Para la razón de sueño se hizo la división del tiempo dromido sobre el tiempo en cama por usuario. Debido a la cantidad de celdas vacías dentro de la base de sleep_day, se crea una función que al hacer la división entre dos datos vacíos la división resulte cero
+
+```{r}
+ratio_cols<-function(x,y){
+  x<-ifelse(!is.na(x),x,0)
+  y<-ifelse(!is.na(y),y,0)
+  ratio_cols<-x/y
+  return(ratio_cols)
+}
+```
+
+```{r}
+a_s_w_1<-a_s_w %>% 
+  mutate(sleep_ratio=ratio_cols(TotalMinutesAsleep,TotalTimeInBed))
+```
+
+Para la variable booleana, se tomaron los minutos de actividad física intensa por usuario. Si la duración de la actividad por usuario era mayor al promedio de tiempo de todos los usuarios se considera como "1" sino es así como cero. 
+```{r}
+a_s_w_1<-a_s_w_1 %>%
+  mutate(bool_v_a_int=case_when(
+    VeryActiveMinutes>mean(VeryActiveMinutes)~ 1,
+    VeryActiveMinutes<mean(VeryActiveMinutes)~0,
+  ))
+```
+
+Se hace un análisis de correlación de todas las variables disponibles antes de centrarnos en las variables de interés
+
+```{r}
+a_s_w_2<-select(a_s_w_1,TotalSteps,TotalDistance,VeryActiveDistance,ModeratelyActiveDistance,LightActiveDistance,SedentaryActiveDistance,VeryActiveMinutes,FairlyActiveMinutes,LightlyActiveMinutes,SedentaryMinutes,Calories,TotalMinutesAsleep,TotalTimeInBed,WeightKg,WeightPounds,Fat,BMI,sleep_ratio,bool_v_a_int)
+cors <- cor(a_s_w_2, use = "pairwise.complete.obs")
+ggcorrplot(cors)
+```
+
+Antes de realizar el modelo de regresión lineal, se calcula la correlación de Spearman que tienen las variables mencionadas y también se realiza un gráfico de dispersión para observar gráficamente la correlación entre las variables.
+
+```{r}
+corr_cal_vaim<-cor.test(x=a_s_w_1$Calories,y=a_s_w_1$bool_v_a_int, method='spearman')
+corr_cal_vaim 
+corr_cal_totaldistance<-cor.test(x=a_s_w_1$Calories,y=a_s_w_1$TotalDistance, method='spearman')
+corr_cal_totaldistance 
+corr_cal_weightkg<-cor.test(x=a_s_w_1$Calories,y=a_s_w_1$WeightKg, method='spearman')
+corr_cal_weightkg
+corr_cal_sleep_ratio<-cor.test(x=a_s_w_1$Calories,y=a_s_w_1$sleep_ratio, method='spearman')
+corr_cal_sleep_ratio
+```
+
+```{r}
+ggplot(data=a_s_w_1, aes(x=TotalDistance,y=Calories))+
+  geom_jitter()+geom_smooth(color='purple')+
+  labs(title="Total de distancia vs Calorías", x="Total de distancia", y="Calorías")
+
+ggplot(data=a_s_w_1, aes(x=bool_v_a_int,y=Calories))+
+  geom_jitter()+geom_smooth(color='green')+
+  labs(title="Variable booleana de minutos en intensidad fuerte vs Calorías", x="Total_pasos", y="Calorías")
+
+ggplot(data=a_s_w_1, aes(x=WeightKg,y=Calories))+
+  geom_jitter()+geom_smooth(color='blue')+
+  labs(title="Peso en kilogramos vs Calorías", x="Peso en kilogramos", y="Calorías")
+
+ggplot(data=a_s_w_1, aes(x=sleep_ratio,y=Calories))+
+  geom_jitter()+geom_smooth(color='red')+
+  labs(title="Variable booleana de distancia en intensidad fuerte vs Calorías", x="Total_pasos", y="Calorías")
+```
+A continuación se desarrolla el modelo de regresión lineal múltiple:
+
+```{r}
+
+modelo<-lm(Calories~sleep_ratio+WeightKg+bool_v_a_int+TotalDistance, data=a_s_w_1)
+summary(modelo)
+```
+
+Al analizar los estadísticos "t" podemos determinar que las variables predictoras que están siendo estadísticamente significativas en una regresión lineal contra las calorías son: TotalDistance y WeightKg; ahora se intentara un nuevo modelo solo considerando dichas variables:
+
+```{r}
+modelo1<-lm(Calories~WeightKg+TotalDistance, data=a_s_w_1)
+summary(modelo1)
+```
+Se puede observar que el estadístico t del intercepto sigue sin ser estadísticamente significativo.
+Ahora, se intentará hacer un cambio a la variable dependiente. Se hara una transformación logarítmica a la variable "Calories" para ahora tener un modelo que prediga el cambio porcentual que tendrán las variables predictoras sobre "Calories.
+```{r}
+a_s_w_1<-a_s_w_1 %>% 
+  mutate(ln_calories=log(Calories))
+
+modelo2<-lm(ln_calories~sleep_ratio+WeightKg+bool_v_a_int+TotalDistance, data=a_s_w_1)
+summary(modelo2)
+```
+Tras este modelo, podemos reafirmar que "WeightKg" y "TotalDistance" parecen ajustarse linealmente con "Calories". Intentaremos un modelo individual. 
+```{r}
+modelo3<-lm(ln_calories~WeightKg+TotalDistance, data=a_s_w_1)
+summary(modelo3)
+```
+Parece que en esta ocasión habremos acertado con un modelo que puede ser probado en inflación de variazna, normalidad en los errores, autocorrelación y homocedasticidad. Pero es importante señalar que la variable WeightKg tiene un gran número de filas con datos vacíos y muy probablemente esto provoque que se este ajustando tan bien al modelo. 
+Finalmente se descarta "WeightKg" y se prosigue con "TotalDistance"
+```{r}
+modelo4<-lm(Calories~TotalDistance, data=a_s_w_1)
+summary(modelo4)
+```
+Ahora, en este modelo los estadísticos "t" son significativos tanto para el intercepto, como para la variable predictora y la variable dependiente. La primera prueba a la cual se sometera este modelo es la prueba de linealidad. Primero, haremos un gráfico de dispersión entre  los residuos del modelo con variable dependiente "Calories" y "TotalDistance". Si los residuos se distribuyen aleatoriamente cerca de 0 y con una variabilidad constamte en x podremos determinar que es lineal
+```{r}
+ggplot(data =a_s_w_1, aes(TotalDistance, modelo4$residuals)) +
+    geom_point() + geom_smooth(color = "firebrick") + geom_hline(yintercept = 0) +
+    theme_bw()
+
+```
+Se puede observar una gran concentración de residuales al comienzo del gráfico y que no se distribuyen de forma aleatoria y uniforme a lo que podemos determinar que no es un modelo lineal, o que se omitieron variables, o que existe una fuerte correlación o que la forma funcional no es correcta. Para esto, haremos la prueba de Ramsey de linealidad (RESET) 
+```{r}
+resettest(modelo4)
+```
+El estadístico p de la prueba de Ramsey es menor a 0.05 por lo que podemos determinar que existe suficiente evidencia de que el modelo no es lineal. Esto tiene sentido debido a que entre más distancia se recorra mayor cantidad de calorías se quemarán y probablemente esten correlacionadas.
+
+# FASE V: Actuar
+
+Tras no haber obtenido un modelo de regresión lineal que pudiera explicar la perdida de calorías, no significa que no haya suficientes propuestas para impulsar a Bellabeat y a  sus productos.
+
+Como se comentó con anterioridad, este análisis esta centrado en determinar ideas de marketing que puedan apoyar al producto de Bellabeat que es un reloj inteligente.
+
+* **1. Notificaciones que impulsen a una vida más sana**: Si este producto tiene la capacidad de medir la intensidad física con la cual un usuario se ejercita; se podría generar un programa de notificaciones que impulse a las personas a cumplir su meta de ejercicio, o que las aliente atener un estilo de vida más sano al medir cuanto se ha ejercitado por día de acuerdo a su intensidad. Así podría alentarlos a un estilo de vida más saludable y conseguir la clientela que pueda percibir de mejor manera este producto, porque es un gran número de usuarios de estos productos que no o utilizan como herramienta de ejercicio.
+
+* **2. Cuidado del sueño**: Observamos que sin importar los buenos hábitos de ejercicio que pueda tener el usuario, ninguno cumple con horarios de sueño adecuados o bien establecidos. Se podría generar una agenda o recordatorios de horarios de sueño
+
+*	**3. Recompensas**: Este reloj puede de acuerdo a este análisis recordar los beneficios de una vida saludable, impulsar hábitos de ejercicio y sueños correctos mediante la quema de calorías. Unir los estilos de vida saludables a la quema de calorías, que al final si es un resultado que podemos determinar gracias a los intentos de modelos de regresión lineal.
+
+*	**4. Acercarse más a la mujer**: Impulsar la recolección de datos del cliente más importante de Bellabeat es la idea adecuada para impulsar a Bellabeat en su propia clientela. Es necesario realizar el mismo ejerciio que Fitbit y buscar recopilar información de la mujer, para realizar un estudio más dirigido a ella.
+
+
